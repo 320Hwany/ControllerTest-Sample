@@ -3,9 +3,7 @@ package controllertest.fake_class;
 import controllertest.dto.AppendRequest;
 import controllertest.application.MemberService;
 import controllertest.dto.MemberResponse;
-import org.springframework.stereotype.Service;
 
-@Service
 public class MemberFakeService implements MemberService {
 
     @Override
