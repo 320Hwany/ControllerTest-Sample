@@ -31,7 +31,7 @@ class MemberControllerTest extends ControllerTest {
         return new MemberController(memberService);
     }
 
-    @DisplayName("Find 테스트")
+    @DisplayName("Find 테스트 성공")
     @Test
     void find() throws Exception {
         long memberId = 1L;
@@ -40,7 +40,7 @@ class MemberControllerTest extends ControllerTest {
                         get("/members/{memberId}", memberId)
                 )
                 .andExpect(status().isOk())
-                .andDo(document("Find 검증 API",
+                .andDo(document("Find 검증 API 성공",
                         pathParameters(
                                 parameterWithName("memberId").description("회원 id")
                         ),
@@ -51,6 +51,30 @@ class MemberControllerTest extends ControllerTest {
                                         fieldWithPath("memberId").type(NUMBER).description("회원 id"),
                                         fieldWithPath("name").type(STRING).description("이름"),
                                         fieldWithPath("age").type(NUMBER).description("나이")
+                                )
+                                .build()
+                        )));
+    }
+
+    @DisplayName("Find 테스트 실패")
+    @Test
+    void findFail() throws Exception {
+        long memberId = 9999L;
+
+        mockMvc.perform(
+                        get("/members/{memberId}", memberId)
+                )
+                .andExpect(status().isBadRequest())
+                .andDo(document("Find 검증 API 실패",
+                        pathParameters(
+                                parameterWithName("memberId").description("회원 id")
+                        ),
+                        resource(ResourceSnippetParameters.builder()
+                                .tag("회원")
+                                .summary("회원 찾기")
+                                .responseFields(
+                                        fieldWithPath("statusCode").type(STRING).description("상태 코드"),
+                                        fieldWithPath("message").type(STRING).description("에러 메세지")
                                 )
                                 .build()
                         )));

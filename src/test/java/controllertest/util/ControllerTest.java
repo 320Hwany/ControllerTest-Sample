@@ -1,6 +1,7 @@
 package controllertest.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import controllertest.error.ApiRestControllerAdvice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.restdocs.RestDocumentationContextProvider;
@@ -19,6 +20,7 @@ public abstract class ControllerTest {
     @BeforeEach
     void setUp(RestDocumentationContextProvider provider) {
         this.mockMvc = MockMvcBuilders.standaloneSetup(initController())
+                .setControllerAdvice(new ApiRestControllerAdvice())
                 .apply(documentationConfiguration(provider))
                 .build();
     }
