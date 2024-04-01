@@ -105,45 +105,45 @@ class MemberControllerTest extends ControllerTest {
     }
 
     // 템플릿 용도
-    @DisplayName("테스트 템플릿")
-    @Test
-    void testTemplate() throws Exception {
-        MockHttpSession session = new MockHttpSession();
-        long memberId = 1L;
-        AppendRequest appendRequest = new AppendRequest("name", 20);
-        String json = objectMapper.writeValueAsString(appendRequest);
-
-        mockMvc.perform(
-                        post("/members/{memberId}", memberId)
-                                .session(session)
-                                .param("keyword", "value")
-                                .contentType(APPLICATION_JSON)
-                                .content(json)
-                )
-                .andExpect(status().isOk())
-                .andDo(document("테스트 템플릿 API",
-                        pathParameters(
-                                parameterWithName("memberId").description("회원 id")
-                        ),
-                        resource(ResourceSnippetParameters.builder()
-                                .tag("테스트")
-                                .summary("테스트 템플릿")
-                                .requestHeaders(
-                                        headerWithName("session").description("세션값")
-                                )
-                                .queryParameters(
-                                        parameterWithName("keyword").description("검색 keyword")
-                                )
-                                .requestFields(
-                                        fieldWithPath("name").type(STRING).description("이름"),
-                                        fieldWithPath("age").type(NUMBER).description("나이")
-                                )
-                                .responseFields(
-                                        fieldWithPath("memberId").type(NUMBER).description("회원 id"),
-                                        fieldWithPath("name").type(STRING).description("이름"),
-                                        fieldWithPath("age").type(NUMBER).description("나이")
-                                )
-                                .build()
-                        )));
-    }
+//    @DisplayName("테스트 템플릿")
+//    @Test
+//    void testTemplate() throws Exception {
+//        MockHttpSession session = new MockHttpSession();
+//        long memberId = 1L;
+//        AppendRequest appendRequest = new AppendRequest("name", 20);
+//        String json = objectMapper.writeValueAsString(appendRequest);
+//
+//        mockMvc.perform(
+//                        post("/members/{memberId}", memberId)
+//                                .session(session)
+//                                .param("keyword", "value")
+//                                .contentType(APPLICATION_JSON)
+//                                .content(json)
+//                )
+//                .andExpect(status().isOk())
+//                .andDo(document("테스트 템플릿 API",
+//                        pathParameters(
+//                                parameterWithName("memberId").description("회원 id")
+//                        ),
+//                        resource(ResourceSnippetParameters.builder()
+//                                .tag("테스트")
+//                                .summary("테스트 템플릿")
+//                                .requestHeaders(
+//                                        headerWithName("session").description("세션값")
+//                                )
+//                                .queryParameters(
+//                                        parameterWithName("keyword").description("검색 keyword")
+//                                )
+//                                .requestFields(
+//                                        fieldWithPath("name").type(STRING).description("이름"),
+//                                        fieldWithPath("age").type(NUMBER).description("나이")
+//                                )
+//                                .responseFields(
+//                                        fieldWithPath("memberId").type(NUMBER).description("회원 id"),
+//                                        fieldWithPath("name").type(STRING).description("이름"),
+//                                        fieldWithPath("age").type(NUMBER).description("나이")
+//                                )
+//                                .build()
+//                        )));
+//    }
 }
